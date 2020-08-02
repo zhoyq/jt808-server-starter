@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.zhoyq</groupId>
             <artifactId>spring-boot-starter-jt808</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.5</version>
         </dependency>
 
         <!-- 数据库 -->

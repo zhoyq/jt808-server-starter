@@ -163,19 +163,19 @@ public class SimpleDataService implements DataService {
     public String terminalRegister(String phone, int province, int city, String manufacturer, String deviceType,
                                    String deviceId, byte licenseColor, String registerLicense) {
         log.info("{}, register", phone);
-            // 查询 是否存在车辆
-            VehicleEntity vehicleEntity = vehicleMapper.selectById(VehicleEntity.class, registerLicense);
-            // 查询 是否存在终端
-            DeviceEntity deviceEntity = deviceMapper.selectById(DeviceEntity.class, deviceId);
+        // 查询 是否存在车辆
+        VehicleEntity vehicleEntity = vehicleMapper.selectById(VehicleEntity.class, registerLicense);
+        // 查询 是否存在终端
+        DeviceEntity deviceEntity = deviceMapper.selectById(DeviceEntity.class, deviceId);
 
-            if (vehicleEntity == null) {
-                // 数据库无此车辆
-                return Const.TERMINAL_REG_NO_VEHICLE;
-            }
+        if (vehicleEntity == null) {
+            // 数据库无此车辆
+            return Const.TERMINAL_REG_NO_VEHICLE;
+        }
 
-            if (deviceEntity == null) {
-                // 数据库无此终端
-                return Const.TERMINAL_REG_NO_TERMINAL;
+        if (deviceEntity == null) {
+            // 数据库无此终端
+            return Const.TERMINAL_REG_NO_TERMINAL;
         }
 
         // 查看注册信息
@@ -290,10 +290,10 @@ public class SimpleDataService implements DataService {
         List<VehicleDeviceSimLink> list = vehicleDeviceSimLinkMapper.selectAll(VehicleDeviceSimLink.class);
         List<SimAuthDto> res = new ArrayList<>(list.size());
         for (VehicleDeviceSimLink link: list) {
-            SimAuthDto simAuthDto = new SimAuthDto();
-            simAuthDto.setSim(link.getSim());
-            simAuthDto.setAuth(link.getAuth());
-            res.add(simAuthDto);
+            res.add(SimAuthDto.builder()
+                    .sim(link.getSim())
+                    .auth(link.getAuth())
+                    .build());
         }
         return res;
     }

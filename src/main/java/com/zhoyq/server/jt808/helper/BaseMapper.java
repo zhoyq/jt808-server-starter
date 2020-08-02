@@ -14,6 +14,7 @@ package com.zhoyq.server.jt808.helper;
 
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.io.Serializable;
@@ -26,19 +27,20 @@ import java.util.Map;
  */
 public interface BaseMapper<T> {
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectById")
-    T selectById(Class<T> clazz, Serializable id);
+    T selectById(Class<T> clazz, @Param("id") Serializable id);
 
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectByCondition")
-    List<T> selectByCondition(Class<T> clazz, String condition, Map<String, Object> map);
+    List<T> selectByCondition(Class<T> clazz, String condition,
+                              @Param("map") Map<String, Object> map);
 
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectByConditionWithOrder")
-    List<T> selectByConditionWithOrder(Class<T> clazz, String condition, String orderBy, Map<String, Object> map);
+    List<T> selectByConditionWithOrder(Class<T> clazz,  String condition, String orderBy, @Param("map") Map<String, Object> map);
 
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectPage")
-    List<T> selectPage(Class<T> clazz, Page<T> page, String condition, Map<String, Object> map);
+    List<T> selectPage(Class<T> clazz, Page<T> page, String condition, @Param("map") Map<String, Object> map);
 
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectCount")
-    Integer selectCount(Class<T> clazz, String condition, Map<String, Object> map);
+    Integer selectCount(Class<T> clazz, String condition, @Param("map") Map<String, Object> map);
 
     @SelectProvider(type = BaseMapperSqlProvider.class, method = "selectAll")
     List<T> selectAll(Class<T> clazz);
@@ -53,7 +55,7 @@ public interface BaseMapper<T> {
     Integer updateWithoutNull(T bean);
 
     @DeleteProvider(type = BaseMapperSqlProvider.class, method = "delete")
-    Integer delete(Class<T> clazz, Serializable id);
+    Integer delete(Class<T> clazz, @Param("id") Serializable id);
 
     @DeleteProvider(type = BaseMapperSqlProvider.class, method = "deleteAll")
     Integer deleteAll(Class<T> clazz);
