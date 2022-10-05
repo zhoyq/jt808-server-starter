@@ -47,7 +47,7 @@
         <jcaptcha.version>1.0</jcaptcha.version>
         <fastjson.version>1.2.62</fastjson.version>
         <hsqldb.version>2.5.0</hsqldb.version>
-        <jackson.version>2.10.5.1</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <feign.version>8.18.0</feign.version>
         <common-text.version>1.8</common-text.version>
         <mina.version>2.0.19</mina.version>
